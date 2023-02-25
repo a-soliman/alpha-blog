@@ -42,4 +42,14 @@ class ArticlesController < ApplicationController
       render 'edit', status: :bad_request
     end
   end
+
+  def destroy
+    @article = Article.find(params[:id])
+    if @article.destroy
+      flash[:notice] = "Article was deleted successfully."
+      redirect_to articles_path
+    else 
+      flash[:alart] = "Unable to delete article"
+    end
+  end
 end

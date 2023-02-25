@@ -12,9 +12,9 @@
         <td><%= article.title %></td>
         <td><%= article.description %></td>
         <td>
-          <a href="/articles/<%= article.id %>">Show</a>
-          <a href="/articles/<%= article.id %>/edit">Edit</a>
-          <a href="">Destroy</a>
+          <%= link_to "Show", article, data: { turbo_method: :get } %>
+          <%= link_to "Edit", edit_article_path(article), data: { turbo_method: :get } %>
+          <%= link_to "Delete", article, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
