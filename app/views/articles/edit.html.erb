@@ -1,29 +1,3 @@
-<% if  @article && @article.errors.any? %>
-  <div class='errors'>
-    <ul>
-      <% @article.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render "form",  url: "/articles/#{@article.id}", method: :put %>
 
-<%= form_with(model: @article, local: true) do |f| %>
-  <div>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-
-  <div>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-
-  <div>
-    <%= f.submit %>
-  </div>
-<% end %>
-
-<div>
-  <a href="/articles">&lt;&lt; Back</a>
-</div>
+<%= render "back_link" %>

@@ -6,3 +6,9 @@
   <strong>Description:</strong>
   <span><%= @article.description %></span>
 </h3>
+
+<div>
+  <%= link_to "Edit", edit_article_path(@article) %>
+  <%= link_to "Delete", @article, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+  <%= render "back_link" %>
+</div>
