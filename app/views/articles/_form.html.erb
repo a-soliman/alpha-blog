@@ -8,18 +8,27 @@
   </div>
 <% end %>
 
-<%= form_with(model: @article, url: url, method: method, local: true) do |f| %>
-  <div>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
+<div class="row d-flex justify-content-center">
+  <div class="col-10">
+    <%= form_with(model: @article, class: "shadow rounded p-3 py-4 mb-3 bg-info", url: url, method: method, local: true) do |f| %>
+      <div class="form-group row mb-2">
+        <%= f.label :title, class: "col-2 col-form-label text-light" %><br />
+        <div class="col-10">
+          <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+        </div>
+      </div>
 
-  <div>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
+      <div class="form-group row mb-4">
+        <%= f.label :description, class: "col-2 col-form-label text-light" %><br />
+        <div class="col-10">
+          <%= f.text_area :description, rows: 10, class: "form-control", placeholder: "Description" %>
+        </div>
+      </div>
 
-  <div>
-    <%= f.submit %>
+      <div class="form-group text-center">
+        <%= f.submit class: "btn btn-outline-light btn-lg" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+  <%= render "back_link" %>
+</div>
