@@ -9,9 +9,6 @@
 <% end %>
 
 <%= form_with(model: @article, url: url, method: method, local: true) do |f| %>
-  <div><%= url %></div> 
-  <div><%= method %></div> 
-
   <div>
     <%= f.label :title %><br />
     <%= f.text_field :title %>
