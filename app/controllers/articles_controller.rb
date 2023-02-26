@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
     if @article != nil 
       render 'edit'
     else
-      flash[:alart] = "Trying to access non-existing article"
+      flash[:alert] = "Trying to access non-existing article"
       redirect_to articles_path
     end
   end
@@ -48,7 +48,7 @@ class ArticlesController < ApplicationController
       flash[:notice] = "Article was deleted successfully."
       redirect_to articles_path
     else 
-      flash[:alart] = "Unable to delete article"
+      flash[:alert] = "Unable to delete article"
     end
   end
 
