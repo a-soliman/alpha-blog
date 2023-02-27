@@ -1,7 +1,8 @@
 <% if flash.any? %>
-  <ul class='flash'>
     <% flash.each do |name, msg| %>
-      <%= msg %>
+      <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        <%= msg %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     <% end %>
-  </ul>
 <% end %>
