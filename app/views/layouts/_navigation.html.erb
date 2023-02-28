@@ -9,8 +9,14 @@
         <li class="nav-item">
         <%= link_to "Home", root_path, class: "nav-link active text-white" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Articles", articles_path, class: "nav-link text-white" %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Articles
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Create new article", new_article_path, class: "dropdown-item" %>
+            <%= link_to "View articles", articles_path, class: "dropdown-item" %>
+          </div>
         </li>
       </ul>
     </div>
