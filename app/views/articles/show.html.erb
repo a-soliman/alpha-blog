@@ -1,14 +1,15 @@
-<h1>
-  <strong>Title:</strong>
-  <span><%= @article.title %></span>
-</h1>
-<h3>
-  <strong>Description:</strong>
-  <span><%= @article.description %></span>
-</h3>
+<%= render "page_title", title: @article.title %>
 
-<div>
-  <%= link_to "Edit", edit_article_path(@article) %>
-  <%= link_to "Delete", @article, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
-  <%= render "back_link" %>
+<div class="card text-center mb-5 shadow ">
+  <div class="card-header font-italic">By Ahmed Soliman</div>
+  <div class="card-body">
+    <div class="card-text text-start"><%= simple_format(@article.description) %></div>
+    <%= link_to "Edit", edit_article_path(@article), data: { turbo_method: :get }, class: "btn btn-outline-warning" %>
+    <%= link_to "Delete", @article, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
+  </div>
+  <div class="card-footer text-muted">
+    <small>Created <%= time_ago_in_words(@article.created_at) %> ago, edited <%= time_ago_in_words(@article.updated_at) %> ago.</small>
+  </div>
 </div>
+
+<%= render "back_link" %>
