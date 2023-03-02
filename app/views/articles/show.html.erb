@@ -1,7 +1,7 @@
 <%= render "page_title", title: @article.title %>
 
 <div class="card text-center mb-5 shadow ">
-  <div class="card-header font-italic">By Ahmed Soliman</div>
+  <div class="card-header font-italic">By <%= @article.user.username %></div>
   <div class="card-body">
     <div class="card-text text-start"><%= simple_format(@article.description) %></div>
     <%= link_to "Edit", edit_article_path(@article), data: { turbo_method: :get }, class: "btn btn-outline-warning" %>

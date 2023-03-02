@@ -1,5 +1,5 @@
 <div class="card text-center mb-5 shadow ">
-  <div class="card-header font-italic">By Ahmed Soliman</div>
+  <div class="card-header font-italic">By <%= article.user.username %></div>
   <div class="card-body">
     <h5 class="card-title">
       <%= link_to article.title, article, class: "text-success" %>
