@@ -1,0 +1,4 @@
+<%= render "shared/page_title", title: "Alpha Bloggers" %>
+<% @users.each do |user|%>
+  <%= render "user", user: user %>
+<% end %>

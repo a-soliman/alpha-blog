@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
-
+  def index
+    @users = User.all
+  end
+  
   def show
   end
 
@@ -13,7 +16,7 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:notice] = "Welcome to the Alpha Blog #{@user.username}, you have successfuly signed up."
-      redirect_to articles_path
+      redirect_to @user
     else
       render 'new', status: :bad_request
     end
@@ -31,7 +34,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:notice] = "Account was updated successfully."
-      redirect_to articles_path
+      redirect_to @user
     else
       render 'edit', status: :bad_request
     end
