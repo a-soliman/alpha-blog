@@ -28,12 +28,16 @@
             <%= link_to "Sign up", signup_path, class: "nav-link active text-white" %>
           </li>
         <% else %>
-           <li class="nav-item">
-              <%= link_to current_user.username, user_path(current_user), class: "nav-link active text-white" %>
-            </li>
-           <li class="nav-item">
-              <%= link_to "Logout", logout_path, data: { turbo_method: :delete }, class: "nav-link active text-white" %>
-            </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.username %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "View profile", current_user, class: "dropdown-item" %>
+              <%= link_to "Edit profile", edit_user_path(current_user), class: "dropdown-item" %>
+              <%= link_to "Logout", logout_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
+            </div>
+          </li>
         <% end %>
       </ul>
     </div>
