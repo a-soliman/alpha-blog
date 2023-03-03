@@ -1,4 +1,6 @@
 <%= render "shared/page_title", title: "Alpha Bloggers" %>
+<%= render "shared/pagination", objs: @users %>
 <% @users.each do |user|%>
   <%= render "user", user: user %>
 <% end %>
+<%= render "shared/pagination", objs: @users %>

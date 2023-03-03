@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page]).order('created_at ASC')
   end
   
   def show
+    @articles = @user.articles.paginate(page: params[:page]).order('created_at ASC')
   end
 
   def new

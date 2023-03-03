@@ -8,7 +8,9 @@
 
   <h3 class="text-center mt-4">Articles</h3>
 
-  <% @user.articles.each do |article| %>
+  <%= render "shared/pagination", objs: @articles %>
+  <% @articles.each do |article| %>
     <%= render "articles/article",  article: article%>
   <% end %>
+  <%= render "shared/pagination", objs: @articles %>
 </div>
