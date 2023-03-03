@@ -4,5 +4,9 @@
     <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam modi minima aliquam corrupti laboriosam? Est modi vel vitae, inventore</p>
     <hr class="my-4">
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam modi minima aliquam corrupti laboriosam? Est modi vel vitae, inventore sint</p>
-    <%= link_to "Sign Up", signup_path, class: "btn btn-success btn-lg" %>
+    <% unless logged_in? %>
+      <%= link_to "Sign Up", signup_path, class: "btn btn-success btn-lg" %>
+    <% else %>
+      <%= link_to "View articles", articles_path, class: "btn btn-success btn-lg" %>
+    <% end %>
   </div>

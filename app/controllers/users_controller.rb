@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:notice] = "Welcome to the Alpha Blog #{@user.username}, you have successfuly signed up."
+      session[:user_id] = @user.id
       redirect_to @user
     else
       render 'new', status: :bad_request
@@ -26,6 +27,8 @@ class UsersController < ApplicationController
   def edit
     if @user != nil
       render 'edit'
+    elsif !can_modify?(@user)
+      redirect_to users_path
     else
       flash[:alert] = "User was not found"
       redirect_to home_path
@@ -33,6 +36,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    redirect_to users_path, status: :forbidden if !can_modify?(@user)
+    
     if @user.update(user_params)
       flash[:notice] = "Account was updated successfully."
       redirect_to @user

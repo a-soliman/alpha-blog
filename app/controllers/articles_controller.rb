@@ -14,9 +14,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    
-    # temporary - setting a user
-    @article.user = User.first
+    @article.user = current_user
     if @article.save
       flash[:notice] = "Article was created successfully."
       redirect_to articles_path
@@ -26,16 +24,18 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-
-    if @article != nil 
-      render 'edit'
-    else
+    if @article == nil
       flash[:alert] = "Trying to access non-existing article"
       redirect_to articles_path
+    elsif !can_modify?(@article)
+      redirect_to articles_path, status: :forbidden
+    else
+      render 'edit'
     end
   end
 
   def update
+    redirect_to articles_path, status: :forbidden if !can_modify?(@article)
 
     if @article.update(article_params)
       flash[:notice] = "Article was updated successfully."
@@ -46,6 +46,9 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    render @article, status: :forbidden if !can_modify?(@article)
+    return
+
     if @article.destroy
       flash[:notice] = "Article was deleted successfully."
       redirect_to articles_path

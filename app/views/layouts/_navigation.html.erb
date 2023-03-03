@@ -7,9 +7,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link active text-white" %>
-        </li>
-        <li class="nav-item">
           <%= link_to "Bloggers", users_path, class: "nav-link active text-white" %>
         </li>
         <li class="nav-item dropdown">
@@ -21,6 +18,21 @@
             <%= link_to "View articles", articles_path, class: "dropdown-item" %>
           </div>
         </li>
+        <% unless logged_in? %>
+          <li class="nav-item">
+            <%= link_to "Login", login_path, class: "nav-link active text-white" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign up", signup_path, class: "nav-link active text-white" %>
+          </li>
+        <% else %>
+           <li class="nav-item">
+              <%= link_to current_user.username, user_path(current_user), class: "nav-link active text-white" %>
+            </li>
+           <li class="nav-item">
+              <%= link_to "Logout", logout_path, data: { turbo_method: :delete }, class: "nav-link active text-white" %>
+            </li>
+        <% end %>
       </ul>
     </div>
   </div>
