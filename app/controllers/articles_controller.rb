@@ -9,10 +9,16 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    redirect_to articles_path, status: :forbidden if !logged_in?
     @article = Article.new
   end
 
   def create
+    if !logged_in?
+      head :forbidden
+      return
+    end
+    
     @article = Article.new(article_params)
     @article.user = current_user
     if @article.save
