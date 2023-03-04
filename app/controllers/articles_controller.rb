@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:show, :index]
 
   def index
     @articles = Article.paginate(page: params[:page]).order('created_at DESC')
@@ -34,6 +35,7 @@ class ArticlesController < ApplicationController
       flash[:alert] = "Trying to access non-existing article"
       redirect_to articles_path
     elsif !can_modify?(@article)
+      flash[:alert] = "You can only edit your own artcles"
       redirect_to articles_path, status: :forbidden
     else
       render 'edit'
@@ -41,9 +43,10 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    redirect_to articles_path, status: :forbidden if !can_modify?(@article)
-
-    if @article.update(article_params)
+    if !can_modify?(@article)
+      flash[:alert] = "You can only edit your own artcles"
+      redirect_to articles_path, status: :forbidden 
+    elsif @article.update(article_params)
       flash[:notice] = "Article was updated successfully."
       redirect_to articles_path
     else
@@ -52,10 +55,10 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    render @article, status: :forbidden if !can_modify?(@article)
-    return
-
-    if @article.destroy
+    if !can_modify?(@article)
+      flash[:alert] = "You can only delete your own artcles"
+      render @article, status: :forbidden 
+    elsif @article.destroy
       flash[:notice] = "Article was deleted successfully."
       redirect_to articles_path
     else 

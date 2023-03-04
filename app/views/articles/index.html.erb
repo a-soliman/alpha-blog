@@ -1,14 +1,6 @@
 <%= render "shared/page_title", title: "Articles Liststing Page" %>
-
-<div>
-  <%= link_to "New Article", new_article_path %>
-</div>
-
 <%= render "shared/pagination", objs: @articles %>
-
-
 <% @articles.each do |article| %>
   <%= render "article",  article: article%>
 <% end %>
-
 <%= render "shared/pagination", objs: @articles %>

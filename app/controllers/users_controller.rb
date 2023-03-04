@@ -26,12 +26,15 @@ class UsersController < ApplicationController
 
   def edit
     if @user != nil
+      if !can_modify?(@user)
+        flash[:alert] = "You can't access this user"
+        redirect_to users_path
+        return
+      end
       render 'edit'
-    elsif !can_modify?(@user)
-      redirect_to users_path
     else
       flash[:alert] = "User was not found"
-      redirect_to home_path
+      redirect_to root_path
     end
   end
 
