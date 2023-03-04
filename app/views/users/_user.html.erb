@@ -18,6 +18,9 @@
           <% if can_modify?(user)%>
             <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-info" %>
           <% end %>
+          <% if current_user.admin? %>
+            <%= link_to "Delete account", user_path(user), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
+          <% end %>
         </div>
       </div>
       <div class="card-footer text-muted">

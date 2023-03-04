@@ -59,7 +59,7 @@ class UsersController < ApplicationController
       
       # delere the user and articles
       @user.destroy
-      session[:user_id] = nil
+      session[:user_id] = nil if current_user == @user # to account for admins trying to remove another user
       flash[:notice] = "Account and all associated articles successfully deleted"
       redirect_to articles_path
 

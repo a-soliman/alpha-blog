@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   helper_method :can_modify?
   def can_modify?(object)
     return false if !logged_in?
+    return true if current_user.admin?
     
     case object.class.name.downcase
     when "article"
