@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
     @users = User.paginate(page: params[:page]).order('created_at ASC')
   end
@@ -46,6 +46,26 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       render 'edit', status: :bad_request
+    end
+  end
+
+  def destroy
+    if @user != nil
+      if !can_modify?(@user)
+        flash[:alert] = "You can't access this user"
+        redirect_to users_path
+        return
+      end
+      
+      # delere the user and articles
+      @user.destroy
+      session[:user_id] = nil
+      flash[:notice] = "Account and all associated articles successfully deleted"
+      redirect_to articles_path
+
+    else
+      flash[:alert] = "User was not found"
+      redirect_to root_path
     end
   end
 

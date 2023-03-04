@@ -36,6 +36,8 @@
               <%= link_to "View profile", current_user, class: "dropdown-item" %>
               <%= link_to "Edit profile", edit_user_path(current_user), class: "dropdown-item" %>
               <%= link_to "Logout", logout_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
+              <hr class="dropdown-divider">
+              <%= link_to "Delete account", user_path(current_user), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "dropdown-item text-danger" %>
             </div>
           </li>
         <% end %>
