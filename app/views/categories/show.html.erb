@@ -1,1 +1,18 @@
-<%= render "shared/page_title", title: @category.name.capitalize %>
+<%= render "shared/page_title", title: "Category #{@category.name.capitalize}" %>
+
+<div class="text-center">
+  
+  <div class="text-center mt-4">
+    <% if is_admin?%>
+      <%= link_to "Edit category", edit_category_path(@category), class: "btn btn-outline-info" %>
+    <% end %>
+  </div>
+
+  <h3 class="text-center mt-4">Articles</h3>
+
+  <%= render "shared/pagination", objs: @articles %>
+  <% @articles.each do |article| %>
+    <%= render "articles/article",  article: article%>
+  <% end %>
+  <%= render "shared/pagination", objs: @articles %>
+</div>

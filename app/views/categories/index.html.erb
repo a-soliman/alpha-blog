@@ -9,6 +9,7 @@
   <div class="card-body">
     <h5 class="card-title">
       <%= link_to category.name.capitalize, category, class: "text-success" %>
+      <p class="catd-text"><%= pluralize(category.articles.count, "article") %></p>
     </h5>
   </div>
   <div class="card-footer text-muted">
