@@ -17,6 +17,15 @@
         </div>
       </div>
 
+      <div class="form-group row mb-4">
+        <%= f.label :category, class: "col-2 col-form-label text-light" %><br />
+        <div class="col-10">
+          <%= f.collection_select(:category_ids, Category.all, :id, :name, 
+          { propmpt: "Choose categories (optional)"}, { multiple: true, class: "form-select shadow rounded" } ) 
+          %>
+        </div>
+      </div>
+
       <div class="form-group text-center">
         <%= f.submit class: "btn btn-outline-light btn-lg" %>
       </div>
