@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      flash[:notice] = "Category #{@category.name}, was created successfully."
+      flash[:notice] = "Category #{@category.name.capitalize}, was created successfully."
       redirect_to @category
     else
       render 'new', status: :bad_request
