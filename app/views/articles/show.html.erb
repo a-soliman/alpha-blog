@@ -1,7 +1,11 @@
 <%= render "shared/page_title", title: @article.title %>
 
 <div class="card text-center mb-5 shadow ">
-  <div class="card-header font-italic">By <%= @article.user.username %></div>
+  <div class="card-header font-italic">
+    By <%= link_to gravatar_for(@article.user, size: 30), @article.user %> <%= @article.user.username %>
+    <!-- Categories -->
+    <%= render "categories/categories", categories: @article.categories %>
+  </div>
   <div class="card-body">
     <div class="card-text text-start"><%= simple_format(@article.description) %></div>
     <% if can_modify?(@article)%>

@@ -1,0 +1,7 @@
+<% if categories.any? %>
+  <div class="my-2">
+    <% categories.each do |category|%>
+      <%= render "categories/category", category: category %>
+    <% end %>  
+  </div>
+<% end %>
