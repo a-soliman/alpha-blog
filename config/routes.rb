@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   root 'pages#home'
   # root "articles#index"
   resources :articles
-  get 'signup', to: 'users#new'
+  resources :categories, except: %i[:destroy]
   resources :users, except: [:new]
+
+  get 'signup', to: 'users#new'
   get 'login', to: 'sessions#new'
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy"

@@ -10,6 +10,12 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  helper_method :is_admin?
+  def is_admin?
+    return false if !logged_in?
+    current_user.admin?
+  end
+
   helper_method :can_modify?
   def can_modify?(object)
     return false if !logged_in?
@@ -27,6 +33,13 @@ class ApplicationController < ActionController::Base
     if !logged_in?
       flash[:alert] = "You must be logged in to perform that action"
       redirect_to login_path
+    end
+  end
+
+  def require_admin
+    if !(logged_in? && current_user.admin?)
+      flash[:alert] = "Only admins can do this action"
+      redirect_to categories_path, status: :forbidden
     end
   end
 
