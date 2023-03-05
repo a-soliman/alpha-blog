@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show]
-  before_action :require_admin, only: [:new, :create]
+  before_action :set_category, only: [:show, :edit, :update]
+  before_action :require_admin, only: [:new, :create, :edit, :update]
 
   def index
     @categories = Category.paginate(page: params[:page]).order('created_at DESC')
@@ -21,6 +21,18 @@ class CategoriesController < ApplicationController
       redirect_to @category
     else
       render 'new', status: :bad_request
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @category.update(category_params)
+      flash[:notice] = "Category #{@category.name.capitalize}, was updated successfully."
+      redirect_to @category
+    else
+      render 'edit', status: :bad_request
     end
   end
 
