@@ -1,4 +1,7 @@
 class Category < ApplicationRecord
+  has_many :article_categories
+  has_many :articles, through: :article_categories
+
   self.per_page = 5
   before_save { self.name = name.downcase }
 
